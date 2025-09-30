@@ -8,6 +8,17 @@ interface SearchResult {
   description: string;
 }
 
+// Tipe data item dari Google Custom Search API
+interface GoogleSearchItem {
+  link: string;
+  title: string;
+  snippet?: string;
+}
+
+interface GoogleSearchResponse {
+  items?: GoogleSearchItem[];
+}
+
 export async function searchGoogle(
   keyword: string,
   numResults: number = 10
@@ -20,7 +31,7 @@ export async function searchGoogle(
   }
 
   try {
-    const response = await axios.get(
+    const response = await axios.get<GoogleSearchResponse>(
       'https://www.googleapis.com/customsearch/v1',
       {
         params: {
@@ -35,7 +46,7 @@ export async function searchGoogle(
 
     if (!response.data.items) return [];
 
-    return response.data.items.map((item: any, index: number) => {
+    return response.data.items.map((item, index) => {
       const url = new URL(item.link);
       return {
         rank: index + 1,
@@ -50,4 +61,3 @@ export async function searchGoogle(
     throw new Error('Failed to fetch search results');
   }
 }
-
