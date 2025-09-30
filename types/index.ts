@@ -27,3 +27,4 @@ export interface Competitor {
   description: string;
   created_at: string;
 }
+

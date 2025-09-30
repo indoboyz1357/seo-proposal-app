@@ -50,3 +50,4 @@ export async function searchGoogle(
     throw new Error('Failed to fetch search results');
   }
 }
+

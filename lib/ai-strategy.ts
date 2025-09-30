@@ -47,3 +47,4 @@ Berikan minimal 5 tasks per kategori!`;
     throw new Error('Failed to generate strategy');
   }
 }
+
